@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+
+body {
+	font-family: 'Muli', sans-serif;
+	font-size: 16px;
+}
+
+.centered {
+	text-align: center;
+}
+
+#above {
+	padding-bottom: 4em;
+}
+
+#above img {
+	height: 128px;
+	width: 128px;
+}
+
+#above img, #below img {
+	max-width: 100%;
+}
+
+a:link, a:visited, a:active {
+	color: #3498DB;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2C3E50;
+}
+
+#middle img {
+	height: 16px;
+	width: 16px;
+}
+
+#below {
+	padding-top: 1em;
+}
