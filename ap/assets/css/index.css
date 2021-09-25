@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+body {
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.modal-content, .btn {
+	border-radius: 0 !important;
+}
+
+#title {
+	display: block;
+	margin-top: 60px;
+	font-size: 4em;
+	font-family: 'Handlee', cursive;
+	color: #ad1457;
+}
+
+#calendar {
+	position: absolute;
+	padding: 40px;
+}
+
+#calendar .entry {
+	position: relative;
+	text-align: center;
+	background-color: white;
+	margin: 10px 0;
+	padding: 20px;
+	filter: grayscale(100%);
+}
+
+#calendar .entry.enabled {
+	cursor: pointer;
+	filter: none;
+}
+
+#calendar .entry.enabled:hover:before {
+	opacity: 1;
+}
+
+#calendar .entry.enabled:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 200ms;
+}
+
+#calendar .entry.enabled:after {
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 30px 30px 0;
+	border-color: transparent #608A32 transparent transparent;
+	right: 0;
+	top: 0;
+	position: absolute;
+}
+
+#calendar .entry img {
+	height: 150px;
+}
