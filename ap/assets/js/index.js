@@ -1,11 +1,11 @@
 const places = [
+	'https://www.amazon.fr/gp/product/B07DHH95V1',
 	'https://codexanatomy.com/fr/collections/brain-anatomy-art/products/steampunk-brain-art-print',
 	'https://www.etsy.com/fr/listing/1051117442/bracelet-chaton-bracelet-damitie-de-chat',
-	'https://rhinoshield.fr/collections/artist-hello-kitty?device=iphone-12-mini&type=solidsuit-classic&limit=12&dcolor=Blue&prod=iphone-12-mini-solidsuit-classic-or03&bcolor=red&page=0',
+	'Montre connectée',
 	'https://food.trainsweateat.com/products/les-favoris-de-tiny',
-	'5',
-	'6',
-	'7'
+	'https://www.etsy.com/fr/listing/961596374/porte-cle-jeu-video-pac-man-fantomes et https://www.etsy.com/fr/listing/956546692/personnalise-song-message-cassette',
+	'https://rhinoshield.fr/collections/artist-hello-kitty?device=iphone-12-mini&type=solidsuit-classic&limit=12&dcolor=Blue&prod=iphone-12-mini-solidsuit-classic-or03&bcolor=red&page=0'
 ]
 
 const today = new Date()
