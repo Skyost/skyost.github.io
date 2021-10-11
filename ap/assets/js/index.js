@@ -1,10 +1,10 @@
 const places = [
-	'Support téléphone',
+	'Le premier cadeau est caché dans la partie haute du casier blanc.',
+	'Le second cadeau se situe est sous le lit, de mon côté. Plutôt proche des oreillers.',
 	'Coque Rhinoshield Hello Kitty',
-	'Pop Raiponce',
-	'Montre connectée',
-	'Les favoris de Tini',
-	'Portes clés',
+	'Le cadeau du jour se trouve dans ma table de nuit, dans le tiroir du bas.',
+	'Ce cadeau-ci se situe dans mon gros sac noir, en haut de l\'armoir.',
+	'L\'avant-dernier cadeau est dans la table noire, sur ta droite.',
 	'Arrière Pac-Man'
 ]
 
