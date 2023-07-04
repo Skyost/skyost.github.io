@@ -1,0 +1,66 @@
+<script setup>
+import { useRoute, useRuntimeConfig } from '#app'
+
+const runtimeConfig = useRuntimeConfig()
+const route = useRoute()
+const currentAddress = `${runtimeConfig.public.url}${route.path}`
+</script>
+
+<template>
+  <Head class="page-head">
+    <Title>{{ title }}</Title>
+    <Meta name="description" :content="$t('site')" />
+    <Meta name="og:title" :content="title" />
+    <Meta name="og:description" :content="$t('site')" />
+    <Meta name="og:type" content="website" />
+    <Meta name="og:site_name" :content="siteName" />
+    <Meta name="og:url" :content="currentAddress" />
+    <Meta name="og:image" :content="openGraphImage" />
+    <Meta name="og:locale" content="fr" />
+    <Meta name="twitter:card" :content="twitterCard" />
+    <Meta name="twitter:title" :content="title" />
+    <Meta name="twitter:description" :content="$t('site')" />
+    <Meta name="twitter:site" content="@Skyost" />
+    <Meta name="twitter:creator" content="@Skyost" />
+    <Meta name="twitter:url" :content="currentAddress" />
+    <Meta name="twitter:image" :content="twitterImage" />
+    <Link rel="canonical" :href="currentAddress" />
+    <slot />
+  </Head>
+</template>
+
+<script>
+import siteMeta from '~/site/meta'
+
+export default {
+  props: {
+    title: {
+      type: String,
+      default: siteMeta.title
+    },
+    openGraphImage: {
+      type: String,
+      default: `${siteMeta.url}/images/icon.png`
+    },
+    twitterCard: {
+      type: String,
+      default: 'summary'
+    },
+    twitterImage: {
+      type: String,
+      default: `${siteMeta.url}/images/icon.png`
+    }
+  },
+  computed: {
+    siteName () {
+      return siteMeta.title
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.page-head {
+  display: none;
+}
+</style>
