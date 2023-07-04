@@ -40,7 +40,7 @@ export default {
     },
     openGraphImage: {
       type: String,
-      default: `${siteMeta.url}/images/icon.png`
+      default: `${siteMeta.url}/images/skyost.png`
     },
     twitterCard: {
       type: String,
@@ -48,7 +48,7 @@ export default {
     },
     twitterImage: {
       type: String,
-      default: `${siteMeta.url}/images/icon.png`
+      default: `${siteMeta.url}/images/skyost.png`
     }
   },
   computed: {

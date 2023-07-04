@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Generate ⚙️
         run: npm run generate
+      - name: Create .nojekyll file 🧪
+        run: touch ./dist/.nojekyll
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
