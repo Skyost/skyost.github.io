@@ -1,8 +1,6 @@
 <template>
-  <ski-button class="paypal-button" variant="light">
-    <nuxt-link to="https://paypal.me/Skyost">
-      <img src="/images/projects/paypal.svg" alt="PayPal">
-    </nuxt-link>
+  <ski-button class="paypal-button" variant="light" href="https://paypal.me/Skyost">
+    <img src="/images/projects/paypal.svg" alt="PayPal">
   </ski-button>
 </template>
 
