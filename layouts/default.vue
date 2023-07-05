@@ -6,6 +6,14 @@ const head = useLocaleHead({
   identifierAttribute: 'id',
   addSeoAttributes: true
 })
+
+// TODO: Wait for https://github.com/nuxt-modules/i18n/issues/1632 to be fixed.
+const { locale, setLocale } = useI18n()
+onMounted(async () => {
+  const currentLocale = locale.value
+  await setLocale(currentLocale === 'en' ? 'fr' : 'en')
+  await setLocale(currentLocale)
+})
 </script>
 
 <template>

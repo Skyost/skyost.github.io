@@ -127,7 +127,7 @@ export default {
       this.formLoading = true
       try {
         const form = event.target
-        const recaptcha = await load(this.$config.recaptchaKey, { autoHideBadge: true })
+        const recaptcha = await load(this.$config.public.recaptchaKey, { autoHideBadge: true })
         const token = await recaptcha.execute('contact')
         const response = await $fetch(form.action, {
           method: form.method,
