@@ -49,7 +49,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       url,
-      recaptchaKey: process.env.RECAPTCHA_KEY
+      recaptchaKey: '6LeKnbIUAAAAACp2f5sx8-td-qwZHBv-ZaByOa3R'
     }
   },
 
