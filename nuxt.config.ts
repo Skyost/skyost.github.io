@@ -74,7 +74,7 @@ export default defineNuxtConfig({
       useCookie: true,
       fallbackLocale: 'en'
     },
-    precompile: {
+    compilation: {
       escapeHtml: false,
       strictMessage: false
     }
@@ -86,24 +86,17 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    hostname: url,
-    trailingSlash: true,
-    exclude: [
-      '/404/'
-    ]
+    siteUrl: url, // TODO: Will soon be deprecated.
+    trailingSlash: true
   },
 
   linkChecker: {
-    hostname: url,
+    host: url,
     trailingSlash: true,
     failOn404: false
   },
 
   cname: {
     hostname: url
-  },
-
-  robots: {
-    sitemap: `${url}/sitemap.xml`
   }
 })
