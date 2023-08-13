@@ -1,13 +1,21 @@
-<script setup>
-const { locales, setLocale } = useI18n()
+<script setup lang="ts">
+const { locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const localeCodes = computed<string[]>(() => {
+  const result = []
+  for (const locale of locales.value) {
+    result.push(typeof locale === 'string' ? locale : locale.code)
+  }
+  return result
+})
 </script>
 
 <template>
   <ul class="languages">
-    <li v-for="{code} in locales" :key="code">
-      <a href="#" @click.prevent.stop="setLocale(code)">
+    <li v-for="code in localeCodes" :key="code">
+      <nuxt-link :to="switchLocalePath(code)">
         <img :src="`/images/languages/${code}.svg`" :alt="code">
-      </a>
+      </nuxt-link>
     </li>
   </ul>
 </template>

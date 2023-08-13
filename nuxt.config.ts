@@ -1,12 +1,12 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import StylelintPlugin from 'vite-plugin-stylelint'
 import eslintPlugin from 'vite-plugin-eslint'
-import siteMeta from './site/meta'
 import 'dotenv/config'
-import debug from './site/debug'
+import { siteMeta } from './site/meta'
+import { debug } from './site/debug'
 
 let url = siteMeta.url
-if (debug.debug) {
+if (debug) {
   url = 'http://localhost:3000'
 }
 
@@ -26,6 +26,10 @@ export default defineNuxtConfig({
     }
   },
 
+  devtools: {
+    enabled: debug
+  },
+
   css: [
     '~/assets/app.scss'
   ],
@@ -41,7 +45,6 @@ export default defineNuxtConfig({
     '~/modules/generate-cname',
     'skimple-components/nuxt',
     '@nuxtjs/i18n',
-    'nuxt-link-checker',
     'nuxt-simple-sitemap',
     'nuxt-simple-robots'
   ],
@@ -69,11 +72,13 @@ export default defineNuxtConfig({
     ],
     langDir: 'site/languages',
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    strategy: 'prefix_and_default',
+    trailingSlash: true,
     detectBrowserLanguage: {
       useCookie: true,
-      fallbackLocale: 'en'
+      redirectOn: 'root'
     },
+    customRoutes: 'config',
     compilation: {
       escapeHtml: false,
       strictMessage: false
@@ -85,14 +90,13 @@ export default defineNuxtConfig({
     bootstrapJs: false
   },
 
-  sitemap: {
-    siteUrl: url, // TODO: Will soon be deprecated.
+  site: {
+    url,
+    name: siteMeta.title,
     trailingSlash: true
   },
 
   linkChecker: {
-    host: url,
-    trailingSlash: true,
     failOn404: false
   },
 

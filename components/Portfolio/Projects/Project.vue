@@ -1,3 +1,29 @@
+<script setup lang="ts">
+interface Project {
+  url: string,
+  stores: { [key: string]: string }
+}
+
+defineProps<{ project: string }>()
+
+const projects: { [key: string]: Project } = {
+  werewolf: {
+    url: 'https://werewolf.skyost.eu/',
+    stores: {
+      'google-play': 'https://play.google.com/store/apps/details?id=fr.skyost.werewolf',
+      'app-store': 'https://itunes.apple.com/app/id1504559806'
+    }
+  },
+  bacomathiques: {
+    url: 'https://bacomathiqu.es',
+    stores: {
+      'google-play': 'https://play.google.com/store/apps/details?id=fr.bacomathiques',
+      'app-store': 'https://itunes.apple.com/app/id1458503418'
+    }
+  }
+}
+</script>
+
 <template>
   <ski-column md="6" xs="12" class="project">
     <img class="image" :src="`/images/projects/${$t(`projects.project.${project}.image`)}.png`" :alt="project">
@@ -10,42 +36,15 @@
       </h3>
       <p v-html="$t(`projects.project.${project}.description`)" />
       <ski-columns class="stores">
-        <ski-column v-for="store in ['app-store', 'google-play']" :key="store" width="6">
-          <nuxt-link class="store" :to="projects[project][store]">
-            <img :src="`/images/projects/${store}.svg`" :alt="store">
+        <ski-column v-for="(store, storeName) in projects[project].stores" :key="storeName" width="6">
+          <nuxt-link class="store" :to="store">
+            <img :src="`/images/projects/${storeName}.svg`" :alt="store">
           </nuxt-link>
         </ski-column>
       </ski-columns>
     </div>
   </ski-column>
 </template>
-
-<script>
-export default {
-  props: {
-    project: {
-      type: String,
-      required: true
-    }
-  },
-  data () {
-    return {
-      projects: {
-        werewolf: {
-          url: 'https://werewolf.skyost.eu/',
-          'google-play': 'https://play.google.com/store/apps/details?id=fr.skyost.werewolf',
-          'app-store': 'https://itunes.apple.com/app/id1504559806'
-        },
-        bacomathiques: {
-          url: 'https://bacomathiqu.es',
-          'google-play': 'https://play.google.com/store/apps/details?id=fr.bacomathiques',
-          'app-store': 'https://itunes.apple.com/app/id1458503418'
-        }
-      }
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .project {

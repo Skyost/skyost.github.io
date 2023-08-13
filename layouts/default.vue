@@ -7,40 +7,24 @@ const head = useLocaleHead({
   addSeoAttributes: true
 })
 
-// TODO: Wait for https://github.com/nuxt-modules/i18n/issues/1632 to be fixed.
-const { locale, setLocale } = useI18n()
 onMounted(async () => {
-  const currentLocale = locale.value
-  await setLocale(currentLocale === 'en' ? 'fr' : 'en')
-  await setLocale(currentLocale)
+  await nextTick()
+  const bootstrap = await import('bootstrap')
+  const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  for (const tooltip of tooltips) {
+    // eslint-disable-next-line no-new
+    new bootstrap.Tooltip(tooltip)
+  }
 })
 </script>
 
 <template>
-  <div>
-    <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-      <Body>
-        <NuxtLoadingIndicator color="#2196f3" />
-        <page-head />
-        <slot />
-      </Body>
-    </Html>
-  </div>
+  <Html :lang="head.htmlAttrs?.lang" :dir="head.htmlAttrs?.dir">
+    <nuxt-loading-indicator color="#2196f3" />
+    <page-head />
+    <slot />
+  </Html>
 </template>
-
-<script lang="ts">
-export default {
-  async mounted () {
-    await this.$nextTick()
-    const bootstrap = await import('bootstrap/dist/js/bootstrap.min')
-    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    for (const tooltip of tooltips) {
-      // eslint-disable-next-line no-new
-      new bootstrap.Tooltip(tooltip)
-    }
-  }
-}
-</script>
 
 <style lang="scss">
 @import 'assets/colors';

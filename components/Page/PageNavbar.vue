@@ -1,6 +1,70 @@
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+  minimumTop?: number,
+  whiteAnchor?: string
+}>(), {
+  minimumTop: 60,
+  whiteAnchor: 'skills-section'
+})
+
+const anchors = {
+  me: 'person-vcard',
+  skills: 'bar-chart-line',
+  projects: 'list-ul',
+  contact: 'envelope'
+}
+
+const resizeObserver = ref<ResizeObserver | null>(null)
+const isWhite = ref<boolean>(false)
+const isFixed = ref<boolean>(false)
+const whiteAnchorTop = ref<number>(100)
+const currentActive = ref<string>('me')
+const anchorsTop = ref<{ [key: string]: number }>({})
+const navbarElement = ref<HTMLElement | null>(null)
+const shadowElement = ref<HTMLElement | null>(null)
+
+onBeforeMount(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+  resizeObserver.value?.disconnect()
+})
+
+onMounted(async () => {
+  await nextTick()
+  refreshComponent()
+  resizeObserver.value = new ResizeObserver(refreshComponent)
+  resizeObserver.value!.observe(document.body)
+})
+
+const refreshComponent = () => {
+  whiteAnchorTop.value = document.getElementById(props.whiteAnchor)!.offsetTop
+  anchorsTop.value = {}
+  for (const anchor in anchors) {
+    anchorsTop.value[anchor] = document.getElementById(anchor)!.offsetTop
+  }
+  shadowElement.value!.style.height = `${navbarElement.value!.offsetHeight}px`
+  shadowElement.value!.style.width = `${navbarElement.value!.offsetWidth}px`
+}
+
+const handleScroll = () => {
+  isFixed.value = document.documentElement.scrollTop >= props.minimumTop
+  isWhite.value = document.documentElement.scrollTop - props.minimumTop >= whiteAnchorTop.value
+  let newCurrentActive = 'me'
+  for (const anchorTop in anchorsTop.value) {
+    if (document.documentElement.scrollTop >= anchorsTop.value[anchorTop]) {
+      newCurrentActive = anchorTop
+    }
+  }
+  currentActive.value = newCurrentActive
+}
+</script>
+
 <template>
   <div class="position-relative">
-    <nav id="page-navbar" ref="navbar" :class="{white: isWhite, 'position-fixed': isFixed}">
+    <nav id="page-navbar" ref="navbarElement" :class="{white: isWhite, 'position-fixed': isFixed}">
       <ol>
         <li>
           <img class="logo" src="/images/skyost.png" alt="Skyost">
@@ -19,75 +83,9 @@
         </li>
       </ol>
     </nav>
-    <div ref="shadow" class="shadow" :class="{'position-fixed': isFixed}" />
+    <div ref="shadowElement" class="shadow" :class="{'position-fixed': isFixed}" />
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    minimumTop: {
-      type: Number,
-      default: 60
-    },
-    whiteAnchor: {
-      type: String,
-      default: 'skills-section'
-    }
-  },
-  data () {
-    return {
-      isWhite: false,
-      isFixed: false,
-      whiteAnchorTop: 100,
-      currentActive: 'me',
-      anchors: {
-        me: 'person-vcard',
-        skills: 'bar-chart-line',
-        projects: 'list-ul',
-        contact: 'envelope'
-      },
-      anchorsTop: {},
-      resizeObserver: null
-    }
-  },
-  beforeMount () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeUnmount () {
-    window.removeEventListener('scroll', this.handleScroll)
-    this.resizeObserver?.disconnect()
-  },
-  async mounted () {
-    await this.$nextTick()
-    this.refreshComponent()
-    this.resizeObserver = new ResizeObserver(this.refreshComponent)
-    this.resizeObserver.observe(document.body)
-  },
-  methods: {
-    refreshComponent () {
-      this.whiteAnchorTop = document.getElementById(this.whiteAnchor).offsetTop
-      this.anchorsTop = {}
-      for (const anchor in this.anchors) {
-        this.anchorsTop[anchor] = document.getElementById(anchor).offsetTop
-      }
-      this.$refs.shadow.style.height = `${this.$refs.navbar.offsetHeight}px`
-      this.$refs.shadow.style.width = `${this.$refs.navbar.offsetWidth}px`
-    },
-    handleScroll () {
-      this.isFixed = document.documentElement.scrollTop >= this.minimumTop
-      this.isWhite = document.documentElement.scrollTop - this.minimumTop >= this.whiteAnchorTop
-      let currentActive = 'me'
-      for (const anchorTop in this.anchorsTop) {
-        if (document.documentElement.scrollTop >= this.anchorsTop[anchorTop]) {
-          currentActive = anchorTop
-        }
-      }
-      this.currentActive = currentActive
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 @import 'assets/bootstrap-mixins';

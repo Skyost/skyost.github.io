@@ -1,7 +1,18 @@
+<script setup lang="ts">
+const props = defineProps<{ error: any }>()
+
+const pageTitleSuffix = computed(() => {
+  if (Object.prototype.hasOwnProperty.call(props.error, 'statusCode')) {
+    return props.error.statusCode
+  }
+  return null
+})
+</script>
+
 <template>
   <div>
     <page-head :title="`${$t('error.title')} ${pageTitleSuffix}`" />
-    <page-content :navbar="false" class="justify-content-center">
+    <page-content :navbar="false">
       <page-section class="p-lg-5 p-3 text-center">
         <img class="icon" src="/images/skyost.png" alt="Skyost">
         <error-display :error="error" />
@@ -9,25 +20,6 @@
     </page-content>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    error: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    pageTitleSuffix () {
-      if (Object.prototype.hasOwnProperty.call(this.error, 'statusCode')) {
-        return this.error.statusCode
-      }
-      return null
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .icon {

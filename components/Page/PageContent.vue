@@ -1,6 +1,10 @@
+<script setup lang="ts">
+withDefaults(defineProps<{ navbar?: boolean }>(), { navbar: true })
+</script>
+
 <template>
   <div id="page-padding">
-    <div id="page-content" :class="{'ms-auto': navbar}">
+    <div id="page-content" :class="{'ms-auto': navbar, 'justify-content-center': !navbar}">
       <article>
         <slot />
       </article>
@@ -10,17 +14,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    navbar: {
-      type: Boolean,
-      default: true
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 @import 'assets/bootstrap-mixins';

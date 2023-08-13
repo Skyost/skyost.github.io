@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import PageContent from '~/components/Page/PageContent.vue'
-import PageSection from '~/components/Page/PageSection.vue'
 import SocialIcons from '~/components/Portfolio/SocialIcons/SocialIcons.vue'
 import SocialIcon from '~/components/Portfolio/SocialIcons/SocialIcon.vue'
 import Skills from '~/components/Portfolio/Skills/Skills.vue'
@@ -9,7 +7,7 @@ import Projects from '~/components/Portfolio/Projects/Projects.vue'
 import Project from '~/components/Portfolio/Projects/Project.vue'
 import PaypalButton from '~/components/Portfolio/Projects/PaypalButton.vue'
 import ContactForm from '~/components/Portfolio/ContactForm.vue'
-import PageFooter from '~/components/Page/PageFooter.vue'
+import PageSection from '~/components/Page/PageSection.vue'
 </script>
 
 <template>

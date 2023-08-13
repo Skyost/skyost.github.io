@@ -1,25 +1,42 @@
-<script setup>
-import { useRoute, useRuntimeConfig } from '#app'
+<script setup lang="ts">
+import { siteMeta } from '~/site/meta'
+const { t } = useI18n()
+
+const props = withDefaults(defineProps<{
+  title?: string,
+  description?: string | null,
+  openGraphImage?: string,
+  twitterCard?: string,
+  twitterImage?: string
+}>(), {
+  title: siteMeta.title,
+  description: null,
+  openGraphImage: `${siteMeta.url}/images/social/open-graph.png`,
+  twitterCard: 'summary',
+  twitterImage: `${siteMeta.url}/images/social/twitter.png`
+})
 
 const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
 const currentAddress = `${runtimeConfig.public.url}${route.path}`
+
+const metaDescription = computed(() => props.description ?? t('site'))
 </script>
 
 <template>
   <Head class="page-head">
     <Title>{{ title }}</Title>
-    <Meta name="description" :content="$t('site')" />
+    <Meta name="description" :content="metaDescription" />
     <Meta name="og:title" :content="title" />
-    <Meta name="og:description" :content="$t('site')" />
+    <Meta name="og:description" :content="metaDescription" />
     <Meta name="og:type" content="website" />
-    <Meta name="og:site_name" :content="siteName" />
+    <Meta name="og:site_name" :content="siteMeta.title" />
     <Meta name="og:url" :content="currentAddress" />
     <Meta name="og:image" :content="openGraphImage" />
     <Meta name="og:locale" content="fr" />
     <Meta name="twitter:card" :content="twitterCard" />
     <Meta name="twitter:title" :content="title" />
-    <Meta name="twitter:description" :content="$t('site')" />
+    <Meta name="twitter:description" :content="metaDescription" />
     <Meta name="twitter:site" content="@Skyost" />
     <Meta name="twitter:creator" content="@Skyost" />
     <Meta name="twitter:url" :content="currentAddress" />
@@ -28,36 +45,6 @@ const currentAddress = `${runtimeConfig.public.url}${route.path}`
     <slot />
   </Head>
 </template>
-
-<script>
-import siteMeta from '~/site/meta'
-
-export default {
-  props: {
-    title: {
-      type: String,
-      default: siteMeta.title
-    },
-    openGraphImage: {
-      type: String,
-      default: `${siteMeta.url}/images/skyost.png`
-    },
-    twitterCard: {
-      type: String,
-      default: 'summary'
-    },
-    twitterImage: {
-      type: String,
-      default: `${siteMeta.url}/images/skyost.png`
-    }
-  },
-  computed: {
-    siteName () {
-      return siteMeta.title
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .page-head {

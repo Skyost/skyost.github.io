@@ -1,7 +1,51 @@
+<script setup lang="ts">
+import { load } from 'recaptcha-v3'
+
+const formLoading = ref(false)
+const submitSuccess = ref<boolean | null>(null)
+const submitError = ref<boolean | null>(null)
+const name = ref('')
+const email = ref('')
+const subject = ref('')
+const message = ref('')
+const method = ref<'POST' | 'GET'>('POST')
+
+const config = useRuntimeConfig()
+
+const onSubmitContactForm = async (event: Event) => {
+  submitSuccess.value = null
+  submitError.value = null
+  formLoading.value = true
+  try {
+    const form = event.target! as HTMLFormElement
+    const recaptcha = await load(config.public.recaptchaKey, { autoHideBadge: true })
+    const token = await recaptcha.execute('contact')
+    const response: Object = await $fetch(form.action, {
+      method: method.value,
+      body: {
+        name: name.value,
+        _replyto: email.value,
+        subject: subject.value,
+        message: message.value,
+        'g-recaptcha-response': token
+      }
+    })
+    if ('ok' in response && response.ok) {
+      submitSuccess.value = true
+    } else {
+      submitError.value = true
+    }
+  } catch (ex) {
+    submitError.value = true
+  }
+  formLoading.value = false
+}
+</script>
+
 <template>
   <form
     action="https://formspree.io/mqkvzozl"
-    method="POST"
+    :method="method"
     @submit.prevent="onSubmitContactForm"
   >
     <ski-columns>
@@ -15,6 +59,7 @@
           :disabled="formLoading"
           :placeholder="$t('contact.name.placeholder')"
           aria-describedby="contact-name-help"
+          required
         />
         <small
           id="contact-name-help"
@@ -33,6 +78,7 @@
           :disabled="formLoading"
           :placeholder="$t('contact.email.placeholder')"
           aria-describedby="contact-email-help"
+          required
         />
         <small
           id="contact-email-help"
@@ -51,6 +97,7 @@
           :disabled="formLoading"
           :placeholder="$t('contact.subject.placeholder')"
           aria-describedby="contact-subject-help"
+          required
         />
         <small
           id="contact-subject-help"
@@ -71,6 +118,7 @@
           :disabled="formLoading"
           :placeholder="$t('contact.message.placeholder')"
           aria-describedby="contact-message-help"
+          required
         />
         <small
           id="contact-message-help"
@@ -104,54 +152,6 @@
     </ski-columns>
   </form>
 </template>
-
-<script>
-import { load } from 'recaptcha-v3'
-
-export default {
-  data () {
-    return {
-      formLoading: false,
-      submitSuccess: null,
-      submitError: null,
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    }
-  },
-  methods: {
-    async onSubmitContactForm (event) {
-      this.submitSuccess = null
-      this.submitError = null
-      this.formLoading = true
-      try {
-        const form = event.target
-        const recaptcha = await load(this.$config.public.recaptchaKey, { autoHideBadge: true })
-        const token = await recaptcha.execute('contact')
-        const response = await $fetch(form.action, {
-          method: form.method,
-          body: {
-            name: this.name,
-            _replyto: this.email,
-            subject: this.subject,
-            message: this.message,
-            'g-recaptcha-response': token
-          }
-        })
-        if (Object.prototype.hasOwnProperty.call(response, 'ok') && response.ok) {
-          this.submitSuccess = true
-        } else {
-          this.submitError = true
-        }
-      } catch (ex) {
-        this.submitError = true
-      }
-      this.formLoading = false
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 label {
