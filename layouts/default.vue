@@ -6,8 +6,13 @@ const head = useLocaleHead({
   identifierAttribute: 'id',
   addSeoAttributes: true
 })
+const { locale, setLocale } = useI18n()
 
 onMounted(async () => {
+  // TODO: Just a workaround.
+  const currentLocale = locale.value
+  await setLocale(currentLocale === 'en' ? 'fr' : 'en')
+  await setLocale(currentLocale)
   await nextTick()
   const bootstrap = await import('bootstrap')
   const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
