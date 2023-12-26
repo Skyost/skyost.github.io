@@ -42,11 +42,12 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '~/modules/generate-cname',
+    '~/modules/cname-generator',
     'skimple-components/nuxt',
     '@nuxtjs/i18n',
     'nuxt-simple-sitemap',
-    'nuxt-simple-robots'
+    'nuxt-simple-robots',
+    'nuxt-link-checker'
   ],
 
   runtimeConfig: {
@@ -78,10 +79,15 @@ export default defineNuxtConfig({
       useCookie: true,
       redirectOn: 'root'
     },
-    customRoutes: 'config',
     compilation: {
       escapeHtml: false,
       strictMessage: false
+    }
+  },
+
+  nitro: {
+    routeRules: {
+      '/': { ssr: false }
     }
   },
 
@@ -97,7 +103,7 @@ export default defineNuxtConfig({
   },
 
   linkChecker: {
-    failOn404: false
+    failOnError: false
   },
 
   cname: {

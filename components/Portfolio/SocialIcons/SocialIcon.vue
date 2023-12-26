@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ social: string }>()
+const props = defineProps<{ social: string }>()
 
 const links: { [key: string]: string } = {
   twitter: 'https://twitter.com/Skyost',
@@ -8,11 +8,19 @@ const links: { [key: string]: string } = {
   apple: 'https://itunes.apple.com/us/developer/hugo-delaunay/id1456648264',
   linkedin: 'https://www.linkedin.com/in/hugodelaunay/'
 }
+const title = computed<string>(() => {
+  const parts = props.social.split('-')
+  const result = []
+  for (const part of parts) {
+    result.push(part.charAt(0).toUpperCase() + part.slice(1))
+  }
+  return result.join(' ')
+})
 </script>
 
 <template>
   <nuxt-link class="social-icon" :to="links[social]">
-    <ski-icon :icon="social" />
+    <ski-icon :icon="social" :title="title" />
   </nuxt-link>
 </template>
 
