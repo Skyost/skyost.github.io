@@ -7,16 +7,7 @@ const head = useLocaleHead({
   addSeoAttributes: true
 })
 
-onMounted(async () => {
-  await nextTick()
-  // @ts-ignore
-  const bootstrap = await import('bootstrap')
-  const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  for (const tooltip of tooltips) {
-    // eslint-disable-next-line no-new
-    new bootstrap.Tooltip(tooltip)
-  }
-})
+useTooltips()
 </script>
 
 <template>
