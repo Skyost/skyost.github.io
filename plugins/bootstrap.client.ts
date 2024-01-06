@@ -1,7 +1,3 @@
-import * as bootstrapTooltip from 'bootstrap/js/dist/tooltip'
+import tooltip from 'bootstrap/js/dist/tooltip'
 
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.provide('bootstrap', {
-    tooltip: bootstrapTooltip
-  })
-})
+export default defineNuxtPlugin(nuxtApp => nuxtApp.provide('bootstrap', { tooltip }))
