@@ -39,8 +39,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     'nuxt-link-checker',
-    '@nuxt/icon',
-    'modules/fixIndex'
+    '@nuxt/icon'
   ],
 
   eslint: {
@@ -69,10 +68,11 @@ export default defineNuxtConfig({
     ],
     langDir: 'site/languages',
     defaultLocale: 'en',
-    strategy: 'prefix',
+    strategy: 'no_prefix',
     trailingSlash: true,
     detectBrowserLanguage: {
       useCookie: true,
+      cookieKey: 'language',
       redirectOn: 'root'
     },
     compilation: {

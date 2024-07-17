@@ -1,21 +1,32 @@
 <script setup lang="ts">
-const { locales } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-const localeCodes = computed<string[]>(() => {
-  const result = []
-  for (const locale of locales.value) {
-    result.push(typeof locale === 'string' ? locale : locale.code)
+import type { LocaleObject } from '@nuxtjs/i18n'
+
+const { locales, setLocale } = useI18n()
+
+const getFlagUrl = (locale: LocaleObject) => {
+  let code = locale.code
+  if (code === 'en') {
+    code = 'gb'
   }
-  return result
-})
+  return `https://flagcdn.com/${code.toLowerCase()}.svg`
+}
 </script>
 
 <template>
   <ul class="languages">
-    <li v-for="code in localeCodes" :key="code">
-      <nuxt-link :to="switchLocalePath(code)">
-        <img :src="`/images/languages/${code}.svg`" :alt="code">
-      </nuxt-link>
+    <li
+      v-for="locale in locales"
+      :key="locale.code"
+    >
+      <a
+        href="#"
+        @click.prevent="setLocale(locale.code)"
+      >
+        <img
+          :src="getFlagUrl(locale)"
+          :alt="locale.name"
+        >
+      </a>
     </li>
   </ul>
 </template>
