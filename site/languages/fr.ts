@@ -1,7 +1,7 @@
 export default {
   site: 'Le site web personnel de Hugo Delaunay, aussi connu sous le nom de Skyost, encore un autre développeur.',
   me: {
-    description1: 'Mon nom IRL est <strong>Hugo Delaunay</strong> (cela fait désormais plus de dix ans que j\'utilise le pseudonyme <q><strong>Skyost</strong></q> sur internet) et je suis développeur amateur.<br>J\'écris aussi des articles pour un blog concernant le Raspberry Pi. Sobrement intitulé <a href="https://framboise-pi.skyost.eu">Framboise Pi</a>, j\'y partage mes projets, des tutoriels, des astuces, sans oublier quelques actualités concernant cette merveilleuse petite machine.',
+    description1: 'Mon nom IRL est <strong>Hugo Delaunay</strong> (cela fait désormais plus de dix ans que j\'utilise le pseudonyme <q><strong>Skyost</strong></q> sur internet) et je suis développeur amateur.',
     description2: 'Vous trouverez sur ce site web quelques informations sur moi mais aussi sur mes différents travaux.'
   },
   skills: {
@@ -19,12 +19,12 @@ export default {
       werewolf: {
         name: 'Mobile Werewolf',
         description: 'Mobile Werewolf est une version mobile non officielle du célèbre jeu de société <q>Les Loups-garous de Thiercelieux</q>. Le concept est simple : vous et vos amis êtes les habitants d\'un étrange village où certains d\'entre-vous deviennent de méchants loups-garous la nuit tombée.',
-        image: 'werewolf-fr'
+        image: 'werewolf/fr'
       },
-      bacomathiques: {
-        name: 'Bacomathiques',
-        description: '<q>Bac-o-math-iques</q> (ou plus simplement Bacomathiques) est une petite application (mais également un site web) qui contient tout ce dont vous avez besoin pour réviser vos maths en toute tranquillité de la Première à la Terminale ! Que vous cherchiez à passer votre Baccalauréat ou que vous souhaitiez simplement réviser votre cours : tout est possible et tout est gratuit.',
-        image: 'bacomathiques'
+      authenticator: {
+        name: 'Open Authenticator',
+        description: 'Open Authenticator est une application d\'authentification à deux facteurs multiplateforme, gratuite et open-source. Elle permet à ses utilisateurs d\'enregistrer leurs TOTPs (Time-Based One-Time Password) et de les synchroniser entre leurs appareils afin de pouvoir server de facteur d\'authentification lors d\'une connexion.',
+        image: 'openauthenticator'
       }
     },
     description2: 'Si vous souhaitez voir plus de mes projets, vous pouvez consulter mon profil sur <a href="https://github.com/Skyost">Github</a>. Si vous aimez ce que je fais, ou si vous souhaitez juste me supporter, alors vous pouvez me faire un don via PayPal.',

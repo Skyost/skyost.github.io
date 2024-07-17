@@ -1,5 +1,5 @@
 <template>
-  <ski-columns>
+  <b-row>
     <slot />
-  </ski-columns>
+  </b-row>
 </template>

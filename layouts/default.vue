@@ -6,12 +6,13 @@ const head = useLocaleHead({
   identifierAttribute: 'id',
   addSeoAttributes: true
 })
-
-useTooltips()
 </script>
 
 <template>
-  <Html :lang="head.htmlAttrs?.lang" :dir="head.htmlAttrs?.dir">
+  <Html
+    :lang="head.htmlAttrs?.lang"
+    :dir="head.htmlAttrs?.dir"
+  >
     <nuxt-loading-indicator color="#2196f3" />
     <page-head />
     <slot />
@@ -47,5 +48,9 @@ textarea {
     background-color: #cecfd1 !important;
     border-color: #c2c3c5;
   }
+}
+
+.vue-icon {
+  vertical-align: -0.125em;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  minimumTop?: number,
+  minimumTop?: number
   whiteAnchor?: string
 }>(), {
   minimumTop: 60,
@@ -64,26 +64,40 @@ const handleScroll = () => {
 
 <template>
   <div class="position-relative">
-    <nav id="page-navbar" ref="navbarElement" :class="{white: isWhite, 'position-fixed': isFixed}">
+    <nav
+      id="page-navbar"
+      ref="navbarElement"
+      :class="{ 'white': isWhite, 'position-fixed': isFixed }"
+    >
       <ol>
         <li>
-          <img class="logo" src="/images/skyost.png" alt="Skyost">
-        </li>
-        <li v-for="(icon, anchor) in anchors" :key="anchor">
-          <nuxt-link
-            :to="`#${anchor}`"
-            class="page-navbar-link"
-            :class="{active: currentActive === anchor}"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-            :data-bs-title="$t(`navbar.${anchor}`)"
+          <img
+            class="logo"
+            src="/images/skyost.png"
+            alt="Skyost"
           >
-            <ski-icon :icon="icon" />
-          </nuxt-link>
+        </li>
+        <li
+          v-for="(icon, anchor) in anchors"
+          :key="anchor"
+        >
+          <b-card v-b-tooltip="$t(`navbar.${anchor}`)">
+            <nuxt-link
+              :to="`#${anchor}`"
+              class="page-navbar-link"
+              :class="{ active: currentActive === anchor }"
+            >
+              <icon :name="`bi:${icon}`" />
+            </nuxt-link>
+          </b-card>
         </li>
       </ol>
     </nav>
-    <div ref="shadowElement" class="shadow" :class="{'position-fixed': isFixed}" />
+    <div
+      ref="shadowElement"
+      class="shadow"
+      :class="{ 'position-fixed': isFixed }"
+    />
   </div>
 </template>
 

@@ -23,11 +23,18 @@ const title = computed(() => {
 
 <template>
   <div>
-    <img v-if="errorCode === 404" src="/images/404.svg" alt="404">
+    <img
+      v-if="errorCode === 404"
+      src="/images/404.svg"
+      alt="404"
+    >
     <h1 v-text="title" />
     <p class="mb-0">
       <span v-html="$t('error.description')" />
-      <span v-if="errorCode === 404" v-html="` ${$t('error.contactMe')}`" />
+      <span
+        v-if="errorCode === 404"
+        v-html="` ${$t('error.contactMe')}`"
+      />
     </p>
   </div>
 </template>

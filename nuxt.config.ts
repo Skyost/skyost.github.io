@@ -1,18 +1,12 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import StylelintPlugin from 'vite-plugin-stylelint'
 import eslintPlugin from '@nabla/vite-plugin-eslint'
-import 'dotenv/config'
 import { siteMeta } from './site/meta'
-import { debug } from './site/debug'
-
-let url = siteMeta.url
-if (debug) {
-  url = 'http://localhost:3000'
-}
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
+  compatibilityDate: '2024-07-01',
 
   app: {
     head: {
@@ -24,10 +18,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
-  },
-
-  devtools: {
-    enabled: debug
   },
 
   css: [
@@ -42,19 +32,24 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxt/eslint',
     'nuxt-cname-generator',
-    'skimple-components/nuxt',
+    '@bootstrap-vue-next/nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/sitemap',
-    'nuxt-simple-robots',
-    'nuxt-link-checker'
+    '@nuxtjs/robots',
+    'nuxt-link-checker',
+    '@nuxt/icon'
   ],
 
-  runtimeConfig: {
-    public: {
-      url,
-      recaptchaKey: '6LeKnbIUAAAAACp2f5sx8-td-qwZHBv-ZaByOa3R'
+  eslint: {
+    config: {
+      stylistic: true
     }
+  },
+
+  icon: {
+    class: 'vue-icon'
   },
 
   i18n: {
@@ -91,13 +86,8 @@ export default defineNuxtConfig({
     }
   },
 
-  skimpleComponents: {
-    bootstrapCss: false,
-    bootstrapJs: false
-  },
-
   site: {
-    url,
+    url: siteMeta.url,
     name: siteMeta.title,
     trailingSlash: true
   },
@@ -107,6 +97,6 @@ export default defineNuxtConfig({
   },
 
   cname: {
-    host: url
+    host: siteMeta.url
   }
 })

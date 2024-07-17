@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import Phone from '~/components/Portfolio/Projects/Phone.vue'
+
 interface Project {
-  url: string,
+  url: string
   stores: { [key: string]: string }
 }
 
@@ -14,36 +16,59 @@ const projects: { [key: string]: Project } = {
       'app-store': 'https://itunes.apple.com/app/id1504559806'
     }
   },
-  bacomathiques: {
-    url: 'https://bacomathiqu.es',
+  authenticator: {
+    url: 'https://openauthenticator.app',
     stores: {
-      'google-play': 'https://play.google.com/store/apps/details?id=fr.bacomathiques',
-      'app-store': 'https://itunes.apple.com/app/id1458503418'
+      'google-play': 'https://play.google.com/store/apps/details?id=app.openauthenticator',
+      'app-store': 'https://itunes.apple.com/app/id6479272927'
     }
   }
 }
 </script>
 
 <template>
-  <ski-column md="6" xs="12" class="project">
-    <img class="image" :src="`/images/projects/${$t(`projects.project.${project}.image`)}.png`" :alt="project">
+  <b-col
+    md="6"
+    xs="12"
+    class="project"
+  >
+    <phone>
+      <img
+        class="image"
+        :src="`/images/projects/${$t(`projects.project.${project}.image`)}.png`"
+        :alt="project"
+      >
+    </phone>
     <div class="caption">
       <h3>
         {{ $t(`projects.project.${project}.name`) }}
-        <nuxt-link class="url" :to="projects[project]['url']">
-          <ski-icon icon="box-arrow-up-right" />
+        <nuxt-link
+          class="url"
+          :to="projects[project]['url']"
+        >
+          <icon name="bi:box-arrow-up-right" />
         </nuxt-link>
       </h3>
       <p v-html="$t(`projects.project.${project}.description`)" />
-      <ski-columns class="stores">
-        <ski-column v-for="(store, storeName) in projects[project].stores" :key="storeName" width="6">
-          <nuxt-link class="store" :to="store">
-            <img :src="`/images/projects/${storeName}.svg`" :alt="store">
+      <b-row class="stores">
+        <b-col
+          v-for="(store, storeName) in projects[project].stores"
+          :key="storeName"
+          width="6"
+        >
+          <nuxt-link
+            class="store"
+            :to="store"
+          >
+            <img
+              :src="`/images/projects/${storeName}.svg`"
+              :alt="store"
+            >
           </nuxt-link>
-        </ski-column>
-      </ski-columns>
+        </b-col>
+      </b-row>
     </div>
-  </ski-column>
+  </b-col>
 </template>
 
 <style lang="scss" scoped>
@@ -52,8 +77,7 @@ const projects: { [key: string]: Project } = {
   text-align: center;
 
   .image {
-    max-width: 100%;
-    height: 400px;
+    width: 100%;
   }
 
   .caption {
@@ -103,6 +127,7 @@ const projects: { [key: string]: Project } = {
     .store {
       display: inline-block;
       width: 100%;
+      max-width: 300px;
 
       img {
         width: 100%;

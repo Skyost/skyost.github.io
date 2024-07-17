@@ -10,7 +10,7 @@ const subject = ref('')
 const message = ref('')
 const method = ref<'POST' | 'GET'>('POST')
 
-const config = useRuntimeConfig()
+const appConfig = useAppConfig()
 
 const onSubmitContactForm = async (event: Event) => {
   submitSuccess.value = null
@@ -18,24 +18,26 @@ const onSubmitContactForm = async (event: Event) => {
   formLoading.value = true
   try {
     const form = event.target! as HTMLFormElement
-    const recaptcha = await load(config.public.recaptchaKey, { autoHideBadge: true })
+    const recaptcha = await load(appConfig.recaptchaKey, { autoHideBadge: true })
     const token = await recaptcha.execute('contact')
-    const response: Object = await $fetch(form.action, {
+    const response: object = await $fetch(form.action, {
       method: method.value,
       body: {
-        name: name.value,
-        _replyto: email.value,
-        subject: subject.value,
-        message: message.value,
+        'name': name.value,
+        '_replyto': email.value,
+        'subject': subject.value,
+        'message': message.value,
         'g-recaptcha-response': token
       }
     })
     if ('ok' in response && response.ok) {
       submitSuccess.value = true
-    } else {
+    }
+    else {
       submitError.value = true
     }
-  } catch (ex) {
+  }
+  catch (ex) {
     submitError.value = true
   }
   formLoading.value = false
@@ -43,17 +45,21 @@ const onSubmitContactForm = async (event: Event) => {
 </script>
 
 <template>
-  <form
+  <b-form
     action="https://formspree.io/mqkvzozl"
     :method="method"
     @submit.prevent="onSubmitContactForm"
   >
-    <ski-columns>
-      <ski-column md="6" sm="12" class="mb-3">
+    <b-form-row>
+      <b-col
+        md="6"
+        sm="12"
+        class="mb-3"
+      >
         <label for="contact-name">
-          <ski-icon icon="person-fill" /> {{ $t('contact.name.label') }}
+          <icon name="bi:person-fill" /> {{ $t('contact.name.label') }}
         </label>
-        <ski-form-control
+        <b-form-input
           id="contact-name"
           v-model="name"
           :disabled="formLoading"
@@ -67,12 +73,16 @@ const onSubmitContactForm = async (event: Event) => {
         >
           {{ $t('contact.name.help') }}
         </small>
-      </ski-column>
-      <ski-column md="6" sm="12" class="mb-3">
+      </b-col>
+      <b-col
+        md="6"
+        sm="12"
+        class="mb-3"
+      >
         <label for="contact-email">
-          <ski-icon icon="envelope-fill" /> {{ $t('contact.email.label') }}
+          <icon name="bi:envelope-fill" /> {{ $t('contact.email.label') }}
         </label>
-        <ski-form-control
+        <b-form-input
           id="contact-email"
           v-model="email"
           :disabled="formLoading"
@@ -86,12 +96,15 @@ const onSubmitContactForm = async (event: Event) => {
         >
           {{ $t('contact.email.help') }}
         </small>
-      </ski-column>
-      <ski-column width="12" class="mb-3">
+      </b-col>
+      <b-col
+        cols="12"
+        class="mb-3"
+      >
         <label for="contact-subject">
-          <ski-icon icon="chat-dots-fill" /> {{ $t('contact.subject.label') }}
+          <icon name="bi:chat-dots-fill" /> {{ $t('contact.subject.label') }}
         </label>
-        <ski-form-control
+        <b-form-input
           id="contact-subject"
           v-model="subject"
           :disabled="formLoading"
@@ -105,10 +118,13 @@ const onSubmitContactForm = async (event: Event) => {
         >
           {{ $t('contact.subject.help') }}
         </small>
-      </ski-column>
-      <ski-column width="12" class="mb-3">
+      </b-col>
+      <b-col
+        cols="12"
+        class="mb-3"
+      >
         <label for="contact-message">
-          <ski-icon icon="pencil-fill" /> {{ $t('contact.message.label') }}
+          <icon name="bi:pencil-fill" /> {{ $t('contact.message.label') }}
         </label>
         <textarea
           id="contact-message"
@@ -126,31 +142,40 @@ const onSubmitContactForm = async (event: Event) => {
         >
           {{ $t('contact.message.help') }}
         </small>
-      </ski-column>
-      <ski-column width="12">
-        <ski-button
+      </b-col>
+      <b-col cols="12">
+        <b-button
           id="contact-submit"
           type="submit"
           variant="primary"
-          :disabled="formLoading || submitSuccess"
+          :disabled="formLoading || submitSuccess != null"
           class="d-block w-100"
         >
-          <ski-icon icon="send-fill" /> {{ $t('contact.submit') }}
-        </ski-button>
-      </ski-column>
-      <ski-column width="12" class="text-end">
+          <icon name="bi:send-fill" /> {{ $t('contact.submit') }}
+        </b-button>
+      </b-col>
+      <b-col
+        cols="12"
+        class="text-end"
+      >
         <small class="text-muted mb-2">
-          <ski-icon icon="eye-fill" /> <span v-html="$t('contact.recaptcha')" />
+          <icon name="bi:eye-fill" /> <span v-html="$t('contact.recaptcha')" />
         </small>
-        <span v-if="submitSuccess" class="d-block mb-2 mb-md-0 text-success">
-          <ski-icon icon="check-lg" /> {{ $t('contact.success') }}
+        <span
+          v-if="submitSuccess"
+          class="d-block mb-2 mb-md-0 text-success"
+        >
+          <icon name="bi:check-lg" /> {{ $t('contact.success') }}
         </span>
-        <span v-if="submitError" class="d-block mb-2 mb-md-0 text-danger">
-          <ski-icon icon="exclamation-triangle-fill" /> {{ $t('contact.error') }}
+        <span
+          v-if="submitError"
+          class="d-block mb-2 mb-md-0 text-danger"
+        >
+          <icon name="bi:exclamation-triangle-fill" /> {{ $t('contact.error') }}
         </span>
-      </ski-column>
-    </ski-columns>
-  </form>
+      </b-col>
+    </b-form-row>
+  </b-form>
 </template>
 
 <style lang="scss" scoped>

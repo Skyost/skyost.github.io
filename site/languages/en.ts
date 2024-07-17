@@ -19,12 +19,12 @@ export default {
       werewolf: {
         name: 'Mobile Werewolf',
         description: 'Mobile Werewolf is an unofficial mobile version of the famous board game <q>Mafia</q>. The concept is simple : you and your friends are the inhabitants of a strange village where some of you turn into nasty werewolves at night.',
-        image: 'werewolf-en'
+        image: 'werewolf/en'
       },
-      bacomathiques: {
-        name: 'Bacomathiques',
-        description: '<q>Bac-o-math-iques</q> (or just Bacomathiques) is a small app (but also a website) that contains everything you need to revise maths in the french scholar system from the Première to the Terminale ! If you need pass an exam or you just want to revise your lesson : everything is possible and everything is free.',
-        image: 'bacomathiques'
+      authenticator: {
+        name: 'Open Authenticator',
+        description: 'Open Authenticator is a two factor authentication application, free and open-source. It allows all users to save their TOTPs (Time-Based One-Time Password) and to synchronize them between their devices so that they can be used as the second factor in the 2FA process.',
+        image: 'openauthenticator'
       }
     },
     description2: 'If you want to see more projects, feel free to check out my <a href="https://github.com/Skyost">Github</a> profile. If you like what I do, or if you just want to support me, then you can make a donation using PayPal.',

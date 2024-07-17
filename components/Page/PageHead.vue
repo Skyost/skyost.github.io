@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { siteMeta } from '~/site/meta'
+
 const { t } = useI18n()
 
 const props = withDefaults(defineProps<{
-  title?: string,
-  description?: string | null,
-  openGraphImage?: string,
-  twitterCard?: string,
+  title?: string
+  description?: string | null
+  openGraphImage?: string
+  twitterCard?: string
   twitterImage?: string
 }>(), {
   title: siteMeta.title,
@@ -16,9 +17,8 @@ const props = withDefaults(defineProps<{
   twitterImage: `${siteMeta.url}/images/social/twitter.png`
 })
 
-const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
-const currentAddress = `${runtimeConfig.public.url}${route.path}`
+const currentAddress = `${siteMeta.url}${route.path}`
 
 const metaDescription = computed(() => props.description ?? t('site'))
 </script>
@@ -26,22 +26,70 @@ const metaDescription = computed(() => props.description ?? t('site'))
 <template>
   <Head class="page-head">
     <Title>{{ title }}</Title>
-    <Meta name="description" :content="metaDescription" />
-    <Meta name="og:title" :content="title" />
-    <Meta name="og:description" :content="metaDescription" />
-    <Meta name="og:type" content="website" />
-    <Meta name="og:site_name" :content="siteMeta.title" />
-    <Meta name="og:url" :content="currentAddress" />
-    <Meta name="og:image" :content="openGraphImage" />
-    <Meta name="og:locale" content="fr" />
-    <Meta name="twitter:card" :content="twitterCard" />
-    <Meta name="twitter:title" :content="title" />
-    <Meta name="twitter:description" :content="metaDescription" />
-    <Meta name="twitter:site" content="@Skyost" />
-    <Meta name="twitter:creator" content="@Skyost" />
-    <Meta name="twitter:url" :content="currentAddress" />
-    <Meta name="twitter:image" :content="twitterImage" />
-    <Link rel="canonical" :href="currentAddress" />
+    <Meta
+      name="description"
+      :content="metaDescription"
+    />
+    <Meta
+      name="og:title"
+      :content="title"
+    />
+    <Meta
+      name="og:description"
+      :content="metaDescription"
+    />
+    <Meta
+      name="og:type"
+      content="website"
+    />
+    <Meta
+      name="og:site_name"
+      :content="siteMeta.title"
+    />
+    <Meta
+      name="og:url"
+      :content="currentAddress"
+    />
+    <Meta
+      name="og:image"
+      :content="openGraphImage"
+    />
+    <Meta
+      name="og:locale"
+      content="fr"
+    />
+    <Meta
+      name="twitter:card"
+      :content="twitterCard"
+    />
+    <Meta
+      name="twitter:title"
+      :content="title"
+    />
+    <Meta
+      name="twitter:description"
+      :content="metaDescription"
+    />
+    <Meta
+      name="twitter:site"
+      content="@Skyost"
+    />
+    <Meta
+      name="twitter:creator"
+      content="@Skyost"
+    />
+    <Meta
+      name="twitter:url"
+      :content="currentAddress"
+    />
+    <Meta
+      name="twitter:image"
+      :content="twitterImage"
+    />
+    <Link
+      rel="canonical"
+      :href="currentAddress"
+    />
     <slot />
   </Head>
 </template>

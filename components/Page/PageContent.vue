@@ -4,12 +4,19 @@ withDefaults(defineProps<{ navbar?: boolean }>(), { navbar: true })
 
 <template>
   <div id="page-padding">
-    <div id="page-content" :class="{'ms-auto': navbar, 'justify-content-center': !navbar}">
+    <div
+      id="page-content"
+      :class="{ 'ms-auto': navbar, 'justify-content-center': !navbar }"
+    >
       <article>
         <slot />
       </article>
     </div>
-    <div v-if="navbar" id="page-navbar-container" :class="{'me-auto': navbar}">
+    <div
+      v-if="navbar"
+      id="page-navbar-container"
+      :class="{ 'me-auto': navbar }"
+    >
       <page-navbar />
     </div>
   </div>

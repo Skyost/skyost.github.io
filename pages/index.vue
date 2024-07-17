@@ -12,10 +12,24 @@ import PageSection from '~/components/Page/PageSection.vue'
 
 <template>
   <page-content>
-    <page-section id="me-section" class="blue text-center">
-      <img class="logo" src="/images/skyost.png" alt="Skyost">
-      <h1 class="title">Skyost</h1>
-      <h2 id="me" class="subtitle">Yet Another Developer</h2>
+    <page-section
+      id="me-section"
+      class="blue text-center"
+    >
+      <img
+        class="logo"
+        src="/images/skyost.png"
+        alt="Skyost"
+      >
+      <h1 class="title">
+        Skyost
+      </h1>
+      <h2
+        id="me"
+        class="subtitle"
+      >
+        Yet Another Developer
+      </h2>
 
       <social-icons>
         <social-icon social="twitter" />
@@ -26,19 +40,35 @@ import PageSection from '~/components/Page/PageSection.vue'
       </social-icons>
 
       <p v-html="$t('me.description1')" />
-      <p class="mb-0" v-html="$t('me.description2')" />
+      <p
+        class="mb-0"
+        v-html="$t('me.description2')"
+      />
     </page-section>
     <page-section id="skills-section">
-      <h2 id="skills" class="mb-5">{{ $t('skills.title') }}</h2>
+      <h2
+        id="skills"
+        class="mb-5"
+      >
+        {{ $t('skills.title') }}
+      </h2>
 
       <skills>
-        <skill class="mb-5 mb-md-0" skill="desktop" />
-        <skill class="mb-5 mb-md-0" skill="mobile" />
+        <skill
+          class="mb-5 mb-md-0"
+          skill="desktop"
+        />
+        <skill
+          class="mb-5 mb-md-0"
+          skill="mobile"
+        />
         <skill skill="web" />
       </skills>
     </page-section>
     <page-section id="projects-section">
-      <h2 id="projects">{{ $t('projects.title') }}</h2>
+      <h2 id="projects">
+        {{ $t('projects.title') }}
+      </h2>
 
       <p class="text-center">
         <em>
@@ -47,11 +77,17 @@ import PageSection from '~/components/Page/PageSection.vue'
       </p>
 
       <projects class="mt-5 mb-5">
-        <project class="mb-5 mb-md-0" project="werewolf" />
-        <project project="bacomathiques" />
+        <project
+          class="mb-5 mb-md-0"
+          project="werewolf"
+        />
+        <project project="authenticator" />
       </projects>
 
-      <p class="text-center" v-html="$t('projects.description2')" />
+      <p
+        class="text-center"
+        v-html="$t('projects.description2')"
+      />
 
       <paypal-button class="mt-5 mb-3 paypal-button" />
 
@@ -62,7 +98,12 @@ import PageSection from '~/components/Page/PageSection.vue'
       </p>
     </page-section>
     <page-section>
-      <h2 id="contact" class="mb-3">{{ $t('contact.title') }}</h2>
+      <h2
+        id="contact"
+        class="mb-3"
+      >
+        {{ $t('contact.title') }}
+      </h2>
       <contact-form />
     </page-section>
     <page-section id="footer-section">

@@ -1,7 +1,14 @@
 <template>
-  <ski-button class="paypal-button" variant="light" href="https://paypal.me/Skyost">
-    <img src="/images/projects/paypal.svg" alt="PayPal">
-  </ski-button>
+  <b-button
+    class="paypal-button"
+    variant="light"
+    href="https://paypal.me/Skyost"
+  >
+    <img
+      src="/images/projects/paypal.svg"
+      alt="PayPal"
+    >
+  </b-button>
 </template>
 
 <style lang="scss" scoped>
