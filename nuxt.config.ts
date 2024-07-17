@@ -39,7 +39,8 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     'nuxt-link-checker',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    'modules/fixIndex'
   ],
 
   eslint: {
@@ -81,8 +82,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    routeRules: {
-      '/': { ssr: false }
+    prerender: {
+      routes: ['/']
     }
   },
 
@@ -93,7 +94,10 @@ export default defineNuxtConfig({
   },
 
   linkChecker: {
-    failOnError: false
+    failOnError: false,
+    skipInspections: [
+      'link-text'
+    ]
   },
 
   cname: {
