@@ -38,6 +38,7 @@ const onSubmitContactForm = async (event: Event) => {
     }
   }
   catch (ex) {
+    console.error(ex)
     submitError.value = true
   }
   formLoading.value = false

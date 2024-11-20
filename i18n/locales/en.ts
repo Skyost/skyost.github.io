@@ -66,7 +66,7 @@ export default {
   error: {
     title: 'Error',
     pageNotFound: 'Page not found',
-    description: 'You can keep browsing by going to <a href="javascript:history.back()">the previous page</a> or by going to <a href="/">the home page</a>.',
-    contactMe: 'If something should be here, please <a href="/#contact">report it</a> to me.'
+    description: 'You can keep browsing by going to <a href="javascript:history.back()">the previous page</a> or by going to <a href="/public">the home page</a>.',
+    contactMe: 'If something should be here, please <a href="/public#contact">report it</a> to me.'
   }
 }

@@ -23,6 +23,7 @@ const title = computed<string>(() => {
   <nuxt-link
     class="social-icon"
     :to="links[social]"
+    :aria-label="title"
   >
     <icon
       :name="`simple-icons:${social.replace('-', '')}`"

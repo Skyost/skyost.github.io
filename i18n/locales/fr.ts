@@ -66,7 +66,7 @@ export default {
   error: {
     title: 'Erreur',
     pageNotFound: 'Page non trouvée',
-    description: 'Vous pouvez continuer votre navigation en allant sur <a href="javascript:history.back()">la page précédente</a> ou en allant sur <a href="/">la page d\'accueil</a>.',
-    contactMe: 'Si quelque chose devait se trouver ici, n\'hésitez pas à <a href="/#contact">me contacter</a> pour me le signaler.'
+    description: 'Vous pouvez continuer votre navigation en allant sur <a href="javascript:history.back()">la page précédente</a> ou en allant sur <a href="/public">la page d\'accueil</a>.',
+    contactMe: 'Si quelque chose devait se trouver ici, n\'hésitez pas à <a href="/public#contact">me contacter</a> pour me le signaler.'
   }
 }

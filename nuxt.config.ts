@@ -70,15 +70,15 @@ export default defineNuxtConfig({
       {
         code: 'en',
         file: 'en.ts',
-        iso: 'en-US'
+        language: 'en-US'
       },
       {
         code: 'fr',
         file: 'fr.ts',
-        iso: 'fr-FR'
+        language: 'fr-FR'
       }
     ],
-    langDir: '',
+    langDir: 'i18n/locales',
     defaultLocale: 'en',
     strategy: 'no_prefix',
     trailingSlash: true,
