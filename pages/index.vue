@@ -32,6 +32,7 @@ import PageSection from '~/components/Page/PageSection.vue'
       </h2>
 
       <social-icons>
+        <social-icon social="bluesky" />
         <social-icon social="twitter" />
         <social-icon social="github" />
         <social-icon social="google-play" />

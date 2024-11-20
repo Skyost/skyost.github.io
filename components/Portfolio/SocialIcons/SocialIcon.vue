@@ -2,6 +2,7 @@
 const props = defineProps<{ social: string }>()
 
 const links: { [key: string]: string } = {
+  'bluesky': 'https://skyost.bsky.social',
   'twitter': 'https://twitter.com/Skyost',
   'github': 'https://github.com/Skyost',
   'google-play': 'https://play.google.com/store/apps/dev?id=9192910026538664281',
@@ -24,7 +25,7 @@ const title = computed<string>(() => {
     :to="links[social]"
   >
     <icon
-      :name="`bi:${social}`"
+      :name="`simple-icons:${social.replace('-', '')}`"
       :title="title"
     />
   </nuxt-link>

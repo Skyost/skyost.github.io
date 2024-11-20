@@ -5,8 +5,18 @@ import { siteMeta } from './site/meta'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
+  modules: [
+    '@nuxt/eslint',
+    'nuxt-cname-generator',
+    '@bootstrap-vue-next/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    'nuxt-link-checker',
+    '@nuxt/icon'
+  ],
   ssr: true,
-  compatibilityDate: '2024-07-01',
 
   app: {
     head: {
@@ -24,6 +34,19 @@ export default defineNuxtConfig({
     '~/assets/app.scss'
   ],
 
+  site: {
+    url: siteMeta.url,
+    name: siteMeta.title,
+    trailingSlash: true
+  },
+  compatibilityDate: '2024-07-01',
+
+  nitro: {
+    prerender: {
+      routes: ['/']
+    }
+  },
+
   vite: {
     plugins: [
       StylelintPlugin(),
@@ -31,25 +54,14 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: [
-    '@nuxt/eslint',
-    'nuxt-cname-generator',
-    '@bootstrap-vue-next/nuxt',
-    '@nuxtjs/i18n',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots',
-    'nuxt-link-checker',
-    '@nuxt/icon'
-  ],
+  cname: {
+    host: siteMeta.url
+  },
 
   eslint: {
     config: {
       stylistic: true
     }
-  },
-
-  icon: {
-    class: 'vue-icon'
   },
 
   i18n: {
@@ -66,7 +78,7 @@ export default defineNuxtConfig({
         iso: 'fr-FR'
       }
     ],
-    langDir: 'site/languages',
+    langDir: '',
     defaultLocale: 'en',
     strategy: 'no_prefix',
     trailingSlash: true,
@@ -81,16 +93,8 @@ export default defineNuxtConfig({
     }
   },
 
-  nitro: {
-    prerender: {
-      routes: ['/']
-    }
-  },
-
-  site: {
-    url: siteMeta.url,
-    name: siteMeta.title,
-    trailingSlash: true
+  icon: {
+    class: 'vue-icon'
   },
 
   linkChecker: {
@@ -98,9 +102,5 @@ export default defineNuxtConfig({
     skipInspections: [
       'link-text'
     ]
-  },
-
-  cname: {
-    host: siteMeta.url
   }
 })
